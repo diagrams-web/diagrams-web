@@ -16,6 +16,9 @@ def builder():
 
     diagrams_data = request.form.get('diagrams_data')
     if diagrams_data:
+        # dir may not exist
+        if not os.path.exists(diag_folder):
+          os.makedirs(diag_folder)
         # clean the directory
         _, _, filenames = next(os.walk(diag_folder))
         for one_file in filenames:
