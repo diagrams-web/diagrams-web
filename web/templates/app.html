@@ -7,7 +7,7 @@
     <meta name="description" content="Build Diagram from code in your browser." />
     <meta name="keywords" content="Diagrams web" />
   <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
-  <link rel="stylesheet" type="text/css" href="static/diagrams.css">
+  <link rel="stylesheet" type="text/css" href="static/css/diagrams.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
@@ -19,14 +19,23 @@
     <input type="button" value="More example" id="more_example_btn" />
     <form action="" method="POST" id="diagrams_form">
       <textarea name="diagrams_data" rows="8" cols="80" id="diagrams_data">{{diagrams_data}}</textarea>
+      <hr>
+      <div id="editor">{{diagrams_data}}</div>
       <input type="submit" value="Build">
     </form>
     {% if error %}
       <h4>ERROR</h4>
       <pre><code>{{error}}</code></pre>
     {% else %}
-      <img src="/static/diagrams/{{pic_name}}" alt="">
+      <img src="static/diagrams/{{pic_name}}" alt="">
     {% endif %}
+    <script src="static/js/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/monokai");
+        editor.session.setMode("ace/mode/python");
+    </script>
+
     <script id="example_1_text" type="bogus">
       from diagrams import Diagram
 from diagrams.aws.compute import EC2
@@ -113,5 +122,5 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
     </script>
     <p style="text-align:center">Made with ♥ and <a href="https://oxal.org/projects/sakura/" target="_blank"><g-emoji class="g-emoji" alias="cherry_blossom" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f338.png"><img class="emoji" alt="cherry_blossom" src="https://github.githubassets.com/images/icons/emoji/unicode/1f338.png" width="20" height="20"></g-emoji> Sakura CSS</a></p>
   </body>
-  <script type="text/javascript" src="static/diagrams.js"></script>
+  <script type="text/javascript" src="static/js/diagrams.js"></script>
 </html>

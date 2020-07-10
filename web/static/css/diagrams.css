@@ -1,0 +1,11 @@
+img {
+  margin-bottom: 0px;
+}
+.icon {
+    width: 100px;
+}
+#editor {
+    position: relative;
+    height: 256px; /* about 18 lines*/
+    width: auto;
+}
