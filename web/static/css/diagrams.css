@@ -1,11 +1,27 @@
 img {
   margin-bottom: 0px;
+  width: 100%;
 }
 .icon {
     width: 100px;
 }
+# menu-bar {
+    width: 100%;
+}
+#render {
+    float: right;
+    min-height: 700px;
+    width: 50%;
+}
+#left {
+    float: left;
+    height: 100%;
+    width: 50%;
+}
 #editor {
     position: relative;
-    height: 256px; /* about 18 lines*/
-    width: auto;
+    min-height: 700px;
+}
+#diagrams_data {
+    display: none;
 }

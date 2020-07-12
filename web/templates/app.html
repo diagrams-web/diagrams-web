@@ -6,37 +6,63 @@
     <title>Diagrams On Web</title>
     <meta name="description" content="Build Diagram from code in your browser." />
     <meta name="keywords" content="Diagrams web" />
-  <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" type="text/css">
   <link rel="stylesheet" type="text/css" href="static/css/diagrams.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
-
-    <a href="https://diagrams.mingrammer.com/"><img src="static/diagrams.png" alt="Diagrams" class="icon" /></a>
-    <input type="button" value="Example 1" id="example_1_btn" />
-    <input type="button" value="Example 2" id="example_2_btn" />
-    <input type="button" value="Example 3" id="example_3_btn" />
-    <input type="button" value="More example" id="more_example_btn" />
+    <div id="menu-bar">
+      <input type="button" value="Example 1" id="btn_1" />
+      <input type="button" value="Example 2" id="btn_2" />
+      <input type="button" value="Example 3" id="btn_3" />
+      <input type="button" value="More example" id="btn_more" />
+    </div>
     <form action="" method="POST" id="diagrams_form">
-      <textarea name="diagrams_data" rows="8" cols="80" id="diagrams_data">{{diagrams_data}}</textarea>
-      <hr>
-      <div id="editor">{{diagrams_data}}</div>
-      <input type="submit" value="Build">
+      <div id="left">
+          <textarea name="diagrams_data" id="diagrams_data" rows="0">{{diagrams_data}}</textarea>
+          <div id="editor">{{diagrams_data}}</div>
+      </div>
+      <div id="render">
+        {% if error %}
+          <h4>ERROR</h4>
+          <pre><code>{{error}}</code></pre>
+        {% elif pic_name %}
+          <img src="static/diagrams/{{pic_name}}" alt="">
+        {% endif %}
+      </div>
+      <div id="action">
+        <input type="submit" value="Build">
+      </div>
     </form>
-    {% if error %}
-      <h4>ERROR</h4>
-      <pre><code>{{error}}</code></pre>
-    {% else %}
-      <img src="static/diagrams/{{pic_name}}" alt="">
-    {% endif %}
     <script src="static/js/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/python");
+
+        $("#btn_1").click(function(){
+          var text = $("#text_1").html().trim()
+          editor.setValue(text);
+          $("#diagrams_data").val(editor.getSession().getValue());
+          $("#diagrams_form").submit();
+        });
+        $("#btn_2").click(function(){
+          var text = $("#text_2").html().trim()
+          editor.setValue(text);
+          $("#diagrams_data").val(editor.getSession().getValue());
+          $("#diagrams_form").submit();
+        });
+        $("#btn_3").click(function(){
+          var text = $("#text_3").html().trim()
+          editor.setValue(text);
+          $("#diagrams_data").val(editor.getSession().getValue());
+          $("#diagrams_form").submit();
+        });
+        $("#btn_more").click(function(){
+          window.open("https://diagrams.mingrammer.com/docs/getting-started/examples", "_blank");
+        });
     </script>
 
-    <script id="example_1_text" type="bogus">
+    <script id="text_1" type="bogus">
       from diagrams import Diagram
 from diagrams.aws.compute import EC2
 from diagrams.aws.database import RDS
@@ -49,7 +75,7 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
                   EC2("worker4"),
                   EC2("worker5")] >> RDS("events")
     </script>
-    <script id="example_2_text" type="bogus">
+    <script id="text_2" type="bogus">
       from diagrams import Cluster, Diagram
 from diagrams.gcp.analytics import BigQuery, Dataflow, PubSub
 from diagrams.gcp.compute import AppEngine, Functions
@@ -82,7 +108,7 @@ with Diagram("Message Collecting", show=False):
 
     pubsub >> flow
     </script>
-    <script id="example_3_text" type="bogus">
+    <script id="text_3" type="bogus">
       from diagrams import Cluster, Diagram
 from diagrams.onprem.analytics import Spark
 from diagrams.onprem.compute import Server
@@ -120,7 +146,5 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
 
     ingress >> grpcsvc >> aggregator
     </script>
-    <p style="text-align:center">Made with ♥ and <a href="https://oxal.org/projects/sakura/" target="_blank"><g-emoji class="g-emoji" alias="cherry_blossom" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f338.png"><img class="emoji" alt="cherry_blossom" src="https://github.githubassets.com/images/icons/emoji/unicode/1f338.png" width="20" height="20"></g-emoji> Sakura CSS</a></p>
   </body>
-  <script type="text/javascript" src="static/js/diagrams.js"></script>
 </html>
