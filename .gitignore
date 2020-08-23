@@ -1,2 +1,3 @@
 # generated diagrams
-web/static/diagrams/* 
+web/static/diagrams/*
+web/static/js/node_modules/*
