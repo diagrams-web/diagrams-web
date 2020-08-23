@@ -6,8 +6,11 @@
     <title>Diagrams On Web</title>
     <meta name="description" content="Build Diagram from code in your browser." />
     <meta name="keywords" content="Diagrams web" />
-  <link rel="stylesheet" type="text/css" href="static/css/diagrams.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <link rel="stylesheet" type="text/css" href="static/css/diagrams.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
     <div id="menu-bar">
@@ -30,7 +33,7 @@
         {% endif %}
       </div>
       <div id="action">
-        <input type="submit" value="Build">
+        <input type="button" value="Build" id="build">
       </div>
     </form>
     <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -60,6 +63,10 @@
         $("#btn_more").click(function(){
           window.open("https://diagrams.mingrammer.com/docs/getting-started/examples", "_blank");
         });
+        $("#build").click(function(){
+          $("#diagrams_data").val(editor.getSession().getValue());
+          $("#diagrams_form").submit();
+        })
     </script>
 
     <script id="text_1" type="bogus">
