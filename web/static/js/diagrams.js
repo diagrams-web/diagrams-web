@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+
     var example_1_btn = jQuery('#example_1_btn');
     var example_2_btn = jQuery('#example_2_btn');
     var example_3_btn = jQuery('#example_3_btn');
@@ -6,10 +7,10 @@ jQuery(document).ready(function () {
 
     var diagrams_form = jQuery('#diagrams_form');
 
-    // var diagrams_data_textarea = jQuery('.ace_text-input');
+    var diagrams_data_textarea = jQuery('#diagrams_data');
 
     function InsertDiagramsText(text) {
-        editor.setvalue(text);
+        diagrams_data_textarea.val(text);
         diagrams_form.submit();
     }
 

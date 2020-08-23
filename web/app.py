@@ -7,15 +7,22 @@ app = Flask(__name__)
 def builder():
     """One page app."""
     import os
+    import datetime
     import subprocess
     from flask import request
 
     template = 'app.html'
     values = {}
     diag_folder = "static/diagrams/"
+    # get now to append to the image file to force the browser to refresh the file
+    # when we edt the code as the file have the same name.
+    now = datetime.datetime.now()
 
     diagrams_data = request.form.get('diagrams_data')
     if diagrams_data:
+        # dir may not exist
+        if not os.path.exists(diag_folder):
+          os.makedirs(diag_folder)
         # clean the directory
         _, _, filenames = next(os.walk(diag_folder))
         for one_file in filenames:
@@ -41,7 +48,7 @@ def builder():
           pic_name = filenames[0]
           values.update({
               "diagrams_data": diagrams_data,
-              "pic_name": pic_name,
+              "pic_name": '%s?%s' % (pic_name, now),
           })
 
     return render_template(template, **values)
