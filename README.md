@@ -23,4 +23,4 @@ then open your browser http://0.0.0.0:5000/
 
 and start coding!
 
-[Screenshot](web/static/new_design.png)
+![Screenshot](web/static/new_design.png)
