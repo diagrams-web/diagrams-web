@@ -9,15 +9,16 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" type="text/css" href="static/css/diagrams.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
     <div id="menu-bar">
-      <input type="button" value="Example 1" id="btn_1" />
-      <input type="button" value="Example 2" id="btn_2" />
-      <input type="button" value="Example 3" id="btn_3" />
-      <input type="button" value="More example" id="btn_more" />
+      <button class="btn" id="btn_1">Example <i class="round">1</i></button>
+      <button class="btn" id="btn_2">Example <i class="round">2</i></button>
+      <button class="btn" id="btn_3">Example <i class="round">3</i></button>
+      <button class="btn" id="btn_more">More example</button>
     </div>
     <form action="" method="POST" id="diagrams_form">
       <div id="left">
@@ -33,13 +34,13 @@
         {% endif %}
       </div>
       <div id="action">
-        <input type="button" value="Build" id="build">
+        <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
       </div>
     </form>
     <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
         var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
+        editor.setTheme("ace/theme/clouds");
         editor.session.setMode("ace/mode/python");
 
         $("#btn_1").click(function(){

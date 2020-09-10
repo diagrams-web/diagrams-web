@@ -5,8 +5,11 @@ img {
 .icon {
     width: 100px;
 }
-# menu-bar {
+#menu-bar {
     width: 100%;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 #render {
     float: right;
@@ -24,4 +27,27 @@ img {
 }
 #diagrams_data {
     display: none;
+}
+#action {
+  text-align: right;
+}
+.btn {
+  color: #FFFFFF;
+  background-color: #e587b5;
+  border: 1px solid #60193c;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.btn:hover {
+  background-color: #60193c;
+}
+.round {
+  height: 25px;
+  width: 25px;
+  background-color: #60193c;
+  border-radius: 50%;
+  display: inline-block;
 }
