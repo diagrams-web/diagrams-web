@@ -3,6 +3,8 @@ Work in progress to bring [diagrams](https://github.com/mingrammer/diagrams) on 
 
 Contributions are welcome!
 
+This project is built on Python (Flask app), but there is also a Node.js version (Polka and Sapper with Typescript), check it out: [microdiagram](https://github.com/renyuanz/microdiagram)
+
 
 ## Instructions:
 from source root, run `docker-compose up --build`
