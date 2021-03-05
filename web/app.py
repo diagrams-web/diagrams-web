@@ -15,7 +15,7 @@ def builder():
     values = {}
     diag_folder = "static/diagrams/"
     # get now to append to the image file to force the browser to refresh the file
-    # when we edt the code as the file have the same name.
+    # when we edit the code as the file have the same name.
     now = datetime.datetime.now()
 
     diagrams_data = request.form.get('diagrams_data')
@@ -44,6 +44,7 @@ def builder():
           })
         else:
           # get the pic to display
+          # FIXME don't work with Custom
           _, _, filenames = next(os.walk(diag_folder))
           pic_name = filenames[0]
           values.update({
