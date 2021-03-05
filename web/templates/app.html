@@ -10,149 +10,42 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" type="text/css" href="/static/css/diagrams.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/diagrams.css?090owe=090">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
-    <div id="menu-bar">
-      <button class="btn" id="btn_1">Example <i class="round">1</i></button>
-      <button class="btn" id="btn_2">Example <i class="round">2</i></button>
-      <button class="btn" id="btn_3">Example <i class="round">3</i></button>
-      <button class="btn" id="btn_more">More example</button>
+    <div id="mySidenav" class="sidenav">
+     Help Show icons list on clik add the code or something like
+   </div>
+
+    <div id="main">
+      <div id="menu-bar">
+        <button class="btn" id="open_help">Help</button>
+        <button class="btn" id="close_help">Close</button>
+        <button class="btn" id="btn_1">Example <i class="round">1</i></button>
+        <button class="btn" id="btn_2">Example <i class="round">2</i></button>
+        <button class="btn" id="btn_3">Example <i class="round">3</i></button>
+        <button class="btn" id="btn_more">More example</button>
+      </div>
+      <form action="" method="POST" id="diagrams_form">
+        <div id="left">
+            <textarea name="diagrams_data" id="diagrams_data" rows="0">{{diagrams_data}}</textarea>
+            <div id="editor">{{diagrams_data}}</div>
+        </div>
+        <div id="render" class="{% if error %}error{% endif %}">
+          {% if error %}
+            <h4>ERROR</h4>
+            <pre><code>{{error}}</code></pre>
+          {% elif pic_name %}
+            <img src="static/diagrams/{{pic_name}}" alt="{{pic_name}}">
+          {% endif %}
+        </div>
+        <div id="action">
+          <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
+        </div>
+      </form>
     </div>
-    <form action="" method="POST" id="diagrams_form">
-      <div id="left">
-          <textarea name="diagrams_data" id="diagrams_data" rows="0">{{diagrams_data}}</textarea>
-          <div id="editor">{{diagrams_data}}</div>
-      </div>
-      <div id="render">
-        {% if error %}
-          <h4>ERROR</h4>
-          <pre><code>{{error}}</code></pre>
-        {% elif pic_name %}
-          <img src="static/diagrams/{{pic_name}}" alt="">
-        {% endif %}
-      </div>
-      <div id="action">
-        <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
-      </div>
-    </form>
-    <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/clouds");
-        editor.session.setMode("ace/mode/python");
-
-        $("#btn_1").click(function(){
-          var text = $("#text_1").html().trim()
-          editor.setValue(text);
-          $("#diagrams_data").val(editor.getSession().getValue());
-          $("#diagrams_form").submit();
-        });
-        $("#btn_2").click(function(){
-          var text = $("#text_2").html().trim()
-          editor.setValue(text);
-          $("#diagrams_data").val(editor.getSession().getValue());
-          $("#diagrams_form").submit();
-        });
-        $("#btn_3").click(function(){
-          var text = $("#text_3").html().trim()
-          editor.setValue(text);
-          $("#diagrams_data").val(editor.getSession().getValue());
-          $("#diagrams_form").submit();
-        });
-        $("#btn_more").click(function(){
-          window.open("https://diagrams.mingrammer.com/docs/getting-started/examples", "_blank");
-        });
-        $("#build").click(function(){
-          $("#diagrams_data").val(editor.getSession().getValue());
-          $("#diagrams_form").submit();
-        })
-    </script>
-
-    <script id="text_1" type="bogus">
-      from diagrams import Diagram
-from diagrams.aws.compute import EC2
-from diagrams.aws.database import RDS
-from diagrams.aws.network import ELB
-
-with Diagram("Grouped Workers", show=False, direction="TB"):
-    ELB("lb") >> [EC2("worker1"),
-                  EC2("worker2"),
-                  EC2("worker3"),
-                  EC2("worker4"),
-                  EC2("worker5")] >> RDS("events")
-    </script>
-    <script id="text_2" type="bogus">
-      from diagrams import Cluster, Diagram
-from diagrams.gcp.analytics import BigQuery, Dataflow, PubSub
-from diagrams.gcp.compute import AppEngine, Functions
-from diagrams.gcp.database import BigTable
-from diagrams.gcp.iot import IotCore
-from diagrams.gcp.storage import GCS
-
-with Diagram("Message Collecting", show=False):
-    pubsub = PubSub("pubsub")
-
-    with Cluster("Source of Data"):
-        [IotCore("core1"),
-         IotCore("core2"),
-         IotCore("core3")] >> pubsub
-
-    with Cluster("Targets"):
-        with Cluster("Data Flow"):
-            flow = Dataflow("data flow")
-
-        with Cluster("Data Lake"):
-            flow >> [BigQuery("bq"),
-                     GCS("storage")]
-
-        with Cluster("Event Driven"):
-            with Cluster("Processing"):
-                flow >> AppEngine("engine") >> BigTable("bigtable")
-
-            with Cluster("Serverless"):
-                flow >> Functions("func") >> AppEngine("appengine")
-
-    pubsub >> flow
-    </script>
-    <script id="text_3" type="bogus">
-      from diagrams import Cluster, Diagram
-from diagrams.onprem.analytics import Spark
-from diagrams.onprem.compute import Server
-from diagrams.onprem.database import PostgreSQL
-from diagrams.onprem.inmemory import Redis
-from diagrams.onprem.aggregator import Fluentd
-from diagrams.onprem.monitoring import Grafana, Prometheus
-from diagrams.onprem.network import Nginx
-from diagrams.onprem.queue import Kafka
-
-with Diagram("Advanced Web Service with On-Premise", show=False):
-    ingress = Nginx("ingress")
-
-    metrics = Prometheus("metric")
-    metrics << Grafana("monitoring")
-
-    with Cluster("Service Cluster"):
-        grpcsvc = [
-            Server("grpc1"),
-            Server("grpc2"),
-            Server("grpc3")]
-
-    with Cluster("Sessions HA"):
-        master = Redis("session")
-        master - Redis("replica") << metrics
-        grpcsvc >> master
-
-    with Cluster("Database HA"):
-        master = PostgreSQL("users")
-        master - PostgreSQL("slave") << metrics
-        grpcsvc >> master
-
-    aggregator = Fluentd("logging")
-    aggregator >> Kafka("stream") >> Spark("analytics")
-
-    ingress >> grpcsvc >> aggregator
-    </script>
   </body>
+  <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/static/js/diagrams.js?090=koioilloop" type="text/javascript" charset="utf-8"></script>
 </html>
