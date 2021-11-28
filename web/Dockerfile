@@ -8,6 +8,9 @@ WORKDIR app
 
 RUN pip3 install -r requirements.txt
 
+# add diagrams-xtd
+RUN pip3 install diagrams-0.20.0.2.tar.gz
+
 # add fonts to support CJK languages
 RUN curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip \
 && mkdir -p /usr/share/fonts/NotoSansCJKjp \
