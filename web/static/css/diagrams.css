@@ -79,6 +79,13 @@ img {
   margin-left: 50px;
   color: #60193c;
 }
+.sidenav ul {
+  list-style-type: none;
+}
+
+.sidenav .provider_icon {
+  width: 25px;
+}
 
 #close_help {
   display: hidden;

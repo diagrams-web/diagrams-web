@@ -15,8 +15,12 @@
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
     <div id="mySidenav" class="sidenav">
-     Help Show icons list on clik add the code or something like
-   </div>
+      <ul>
+        {% for one_provider in providers %}
+          <li><a href="#" data-provider="{{one_provider}}">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
 
     <div id="main">
       <div id="menu-bar">

@@ -4,7 +4,7 @@ RUN apk update && apk add --no-cache \
   gcc libc-dev g++ graphviz python3 py-pip python3-dev ttf-opensans curl fontconfig npm
 
 COPY . /app
-WORKDIR app
+WORKDIR /app
 
 RUN pip3 install -r requirements.txt
 
