@@ -1,5 +1,5 @@
 # diagrams-web
-Work in progress to bring [diagrams](https://github.com/mingrammer/diagrams) on web.
+Still work in progress to bring [diagrams](https://github.com/mingrammer/diagrams) on web.
 
 Contributions are welcome!
 
@@ -9,6 +9,9 @@ No more active project:
 - Node.js version (Polka and Sapper with Typescript), check it out: [microdiagram](https://github.com/renyuanz/microdiagram)
 
 ## Instructions:
+
+### from source:
+
 from source root, run `docker-compose up --build`
 
 Wait to have something like this:
@@ -23,6 +26,11 @@ web_1  |  * Restarting with stat
 web_1  |  * Debugger is active!
 web_1  |  * Debugger PIN: 830-873-016
 ```
+
+### from docker hub:
+
+docker pull banana123/diagrams-web:latest
+
 then open your browser http://0.0.0.0:5000/
 
 and start coding!
