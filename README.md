@@ -27,12 +27,41 @@ web_1  |  * Debugger is active!
 web_1  |  * Debugger PIN: 830-873-016
 ```
 
-### from docker hub:
-
-docker pull banana123/diagrams-web:latest
-
 then open your browser http://0.0.0.0:5000/
 
-and start coding!
+and start coding! (i.e updating the code of diagrams-web)
+
+
+### from docker hub:
+
+Here is only if you want to use the interface.
+
+Get the latest image from dockerhub
+
+```shell
+docker pull banana123/diagrams-web:latest
+```
+
+Use any familiar tool to run the container OR
+
+Create a new network if you don't want to mess up with your other projects:
+```shell
+docker network create --subnet=172.22.0.0/16 diagrams-net
+```
+
+Start the container in the previous created subnet with a specific ip.
+```shell
+docker run --name diagrams-web --net diagrams-net --ip 172.22.0.10 banana123/diagrams-web
+```
+You should be able to access the interface on:
+
+http://172.22.0.10:5000/
+
+You also should have access to the logs if it crash and you need to debug!
+
+If you need to access inside the container to check what is inside 
+```shell
+docker exec -it diagrams-web ash
+```
 
 ![Screenshot](web/static/new_design.png)
