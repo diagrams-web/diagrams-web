@@ -1,10 +1,10 @@
-FROM alpine:3.12
+FROM alpine:3.15
 
 RUN apk update && apk add --no-cache \
   gcc libc-dev g++ graphviz python3 py-pip python3-dev ttf-opensans curl fontconfig npm
 
 COPY . /app
-WORKDIR app
+WORKDIR /app
 
 RUN pip3 install -r requirements.txt
 
@@ -19,7 +19,7 @@ RUN curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinte
 && fc-cache -fv
 
 # install editor library
-RUN npm install --prefix ./static/js ace-builds@1.4.12
+RUN npm install --prefix ./static/js ace-builds@1.4.14
 
 ENTRYPOINT ["python3"]
 CMD ["app.py"]

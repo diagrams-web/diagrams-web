@@ -141,14 +141,14 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
             Server("grpc3")]
 
     with Cluster("Sessions HA"):
-        master = Redis("session")
-        master - Redis("replica") << metrics
-        grpcsvc >> master
+        primary = Redis("session")
+        primary - Redis("replica") << metrics
+        grpcsvc >> primary
 
     with Cluster("Database HA"):
-        master = PostgreSQL("users")
-        master - PostgreSQL("slave") << metrics
-        grpcsvc >> master
+        primary = PostgreSQL("users")
+        primary - PostgreSQL("replica") << metrics
+        grpcsvc >> primary
 
     aggregator = Fluentd("logging")
     aggregator >> Kafka("stream") >> Spark("analytics")

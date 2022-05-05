@@ -4,3 +4,8 @@ services:
     build: ./web
     ports: ["5000:5000"]
     volumes: ['./web:/app']
+    healthcheck:
+      test: curl --fail -s http://localhost:5000/ || exit 1
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
