@@ -5,7 +5,7 @@ img {
 .icon {
     width: 100px;
 }
-#menu-bar {
+#menu_bar {
     width: 100%;
     margin-left: 10px;
     margin-top: 10px;
@@ -57,8 +57,8 @@ img {
 
 
 
-/* Side navigation menu fo help */
-.sidenav {
+/* Side navigation menu for help */
+#sidenav {
   height: 100%;
   width: 0;
   position: fixed;
@@ -66,12 +66,12 @@ img {
   top: 0;
   left: 0;
   background-color: #FFFFFF;
-  overflow-x: hidden;
+  overflow-x: scroll;
   padding-top: 60px;
   transition: 0.5s;
 }
 
-.sidenav .closebtn {
+#sidenav .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
@@ -79,11 +79,24 @@ img {
   margin-left: 50px;
   color: #60193c;
 }
-.sidenav ul {
+#sidenav ul {
   list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  /* Below sets up your display method: flex-start|flex-end|space-between|space-around */
+  justify-content: space-around;
+  /* Below removes bullets and cleans white-space */
+  list-style: none;
+  padding: 0;
+  /* Bonus: forces no word-wrap */
+  white-space: nowrap;
 }
 
-.sidenav .provider_icon {
+#sidenav .provider_icon {
+  width: 25px;
+}
+
+#content_menu img{
   width: 25px;
 }
 
@@ -97,6 +110,6 @@ img {
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  #sidenav {padding-top: 15px;}
+  #sidenav a {font-size: 18px;}
 }
