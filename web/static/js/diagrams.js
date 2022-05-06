@@ -4,6 +4,10 @@ jQuery(document).ready(function () {
     editor.setTheme("ace/theme/clouds");
     editor.session.setMode("ace/mode/python");
 
+    if (document.getElementById("sidenav").style.width == 0){
+      $("#close_help").hide();
+    }
+    // Load examples data and submit
     $("#btn_1").click(function(){
       editor.setValue(example_1.trim());
       $("#diagrams_data").val(editor.getSession().getValue());
@@ -24,24 +28,35 @@ jQuery(document).ready(function () {
     $("#btn_more").click(function(){
       window.open("https://diagrams.mingrammer.com/docs/getting-started/examples", "_blank");
     });
+
     $("#build").click(function(){
       $("#diagrams_data").val(editor.getSession().getValue());
       $("#diagrams_form").submit();
     });
 
+    // help side menu
     $("#open_help").click(function(){
-      document.getElementById("mySidenav").style.width = "30%";
+      document.getElementById("sidenav").style.width = "30%";
       document.getElementById("main").style.marginLeft = "30%";
       $("#close_help").show();
       $("#open_help").hide();
     });
 
     $("#close_help").click(function(){
-      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("sidenav").style.width = "0";
       document.getElementById("main").style.marginLeft = "0";
       $("#open_help").show();
       $("#close_help").hide();
     });
+
+    $(".one_provider").click(function(){
+      var data = $(this).data();
+      var content_provider = $("." + data.provider).clone();
+      content_provider.show()
+      $("#content_menu").empty();
+      $("#content_menu").append(content_provider);
+    });
+
 });
 
 var example_1 =`
@@ -114,14 +129,14 @@ with Diagram("Advanced Web Service with On-Premise", show=False):
             Server("grpc3")]
 
     with Cluster("Sessions HA"):
-        master = Redis("session")
-        master - Redis("replica") << metrics
-        grpcsvc >> master
+        primary = Redis("session")
+        primary - Redis("replica") << metrics
+        grpcsvc >> primary
 
     with Cluster("Database HA"):
-        master = PostgreSQL("users")
-        master - PostgreSQL("slave") << metrics
-        grpcsvc >> master
+        primary = PostgreSQL("users")
+        primary - PostgreSQL("replica") << metrics
+        grpcsvc >> primary
 
     aggregator = Fluentd("logging")
     aggregator >> Kafka("stream") >> Spark("analytics")

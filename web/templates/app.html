@@ -9,25 +9,30 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/diagrams.css?090owe=090">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body id="{% block body_id %}normal_body{% endblock %}">
-    <div id="mySidenav" class="sidenav">
-      <ul>
+    <div id="sidenav">
+      <ul id="provider_list">
         {% for one_provider in providers %}
-          <li><a href="#" data-provider="{{one_provider}}">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}</a></li>
+          <li><a href="#" data-provider="{{one_provider.name}}" class="one_provider">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}</a>
+            <div style="display:none;" class="{{one_provider.name}}">
+              {% for one_node in one_provider.nodes %}<h3>{{ one_node.title }}</h3>
+                {% for one_sub_node in one_node.nodes %}<a href="#"><img src="{{one_node.path }}/{{one_sub_node.img}}" />{{one_sub_node.class_name}}</a><br>{% endfor %}
+              {% endfor %}
+            </div>
+          </li>
         {% endfor %}
       </ul>
-      if not selected margin-left : -30px
+      <div id="content_menu">
+      </div>
     </div>
 
     <div id="main">
-      <div id="menu-bar">
+      <div id="menu_bar">
         <button class="btn" id="open_help">Help</button>
-        <button class="btn" id="close_help">Close</button>
+        <button class="btn" id="close_help">&#8592;</button>
         <button class="btn" id="btn_1">Example <i class="round">1</i></button>
         <button class="btn" id="btn_2">Example <i class="round">2</i></button>
         <button class="btn" id="btn_3">Example <i class="round">3</i></button>
