@@ -1,5 +1,5 @@
 # diagrams-web
-Still work in progress to bring [diagrams](https://github.com/mingrammer/diagrams) on web.
+Still work in progress to edit and generate [diagrams](https://github.com/mingrammer/diagrams) with your browser.
 
 Contributions are welcome!
 
