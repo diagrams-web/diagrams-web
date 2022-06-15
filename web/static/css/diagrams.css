@@ -55,8 +55,6 @@ img {
   font-weight: bold;
 }
 
-
-
 /* Side navigation menu for help */
 #sidenav {
   height: 100%;
@@ -96,8 +94,21 @@ img {
   width: 25px;
 }
 
-#content_menu img{
+#sidenav .provider {
+  margin-bottom: 75px;
+}
+
+#content_menu img {
   width: 25px;
+  margin-right: 10px;
+}
+
+#content_menu h3 {
+  padding-left: 25px;
+}
+
+#content_menu a {
+  padding-left: 52px;
 }
 
 #close_help {
@@ -112,4 +123,69 @@ img {
 @media screen and (max-height: 450px) {
   #sidenav {padding-top: 15px;}
   #sidenav a {font-size: 18px;}
+}
+
+.tooltip
+{
+  position: relative;
+  cursor: help;
+  display: inline-block;
+  text-decoration: none;
+  color: #222;
+  outline: none;
+}
+
+.tooltip span
+{
+  visibility: hidden;
+  position: absolute;
+  bottom: 30px;
+  text-align: center;
+  color: #FFF;
+  font-weight: bold;
+  left: 50%;
+  z-index: 999;
+  width: 100px;
+  margin-left: -63px;
+  padding: 10px;
+  border: 2px solid #60193C;
+  opacity: .9;
+  background-color: #E587B5;
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: -ms-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: -o-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+
+.tooltip:hover span
+{
+  visibility: visible;
+}
+
+.tooltip span:before,
+.tooltip span:after
+{
+  content: "";
+  position: absolute;
+  z-index: 1000;
+  bottom: -7px;
+  left: 50%;
+  margin-left: -8px;
+  border-top: 8px solid #60193C;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 0;
+}
+
+.tooltip span:before
+{
+  border-top-color: #ccc;
+  bottom: -8px;
 }

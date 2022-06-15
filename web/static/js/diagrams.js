@@ -57,6 +57,19 @@ jQuery(document).ready(function () {
       $("#content_menu").append(content_provider);
     });
 
+    $(".import_class").click(function(){
+      console.log("data: " + data);
+    });
+
+    $(".node_icon").mouseover(function(){
+      console.log('sadf');
+    });
+
+    $('.tooltip').mouseover(function(){
+      $(this).children('span').show();
+    }).mouseout(function(){
+      $(this).children('span').hide();
+    });
 });
 
 var example_1 =`

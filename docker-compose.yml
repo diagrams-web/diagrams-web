@@ -4,6 +4,7 @@ services:
     build: ./web
     ports: ["5000:5000"]
     volumes: ['./web:/app']
+    command: ["/tmp/startup.sh"]
     healthcheck:
       test: curl --fail -s http://localhost:5000/ || exit 1
       interval: 1m30s

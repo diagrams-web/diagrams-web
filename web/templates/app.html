@@ -16,10 +16,16 @@
     <div id="sidenav">
       <ul id="provider_list">
         {% for one_provider in providers %}
-          <li><a href="#" data-provider="{{one_provider.name}}" class="one_provider">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}</a>
-            <div style="display:none;" class="{{one_provider.name}}">
-              {% for one_node in one_provider.nodes %}<h3>{{ one_node.title }}</h3>
-                {% for one_sub_node in one_node.nodes %}<a href="#"><img src="{{one_node.path }}/{{one_sub_node.img}}" />{{one_sub_node.class_name}}</a><br>{% endfor %}
+          <li><a href="#" data-provider="{{one_provider.name}}" class="one_provider tooltip">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}<span>{{one_provider.name}}</span></a>
+            <div style="display:none;"  class="provider {{one_provider.name}}">
+              {% for one_node in one_provider.nodes %}
+                <h3>{{ one_node.title }}</h3>
+                {% for one_sub_node in one_node.nodes %}
+                  <a href="#" class="import_class" data-path="{{one_node.title}}" data-class="{{ one_sub_node.name }}" data-alias="{{ one_sub_node.alias }}">
+                    <img src="{{one_node.path }}/{{one_sub_node.icon}}" class="node_icon" />{{ one_sub_node.name }} {% if one_sub_node.alias %}({{one_sub_node.alias}}){% endif %}
+                  </a>
+                  <br>
+                {% endfor %}
               {% endfor %}
             </div>
           </li>
@@ -58,5 +64,5 @@
     </div>
   </body>
   <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/static/js/diagrams.js?090=koioilloop" type="text/javascript" charset="utf-8"></script>
+  <script src="/static/js/diagrams.js?090=kop" type="text/javascript" charset="utf-8"></script>
 </html>
