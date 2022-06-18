@@ -23,6 +23,6 @@ RUN curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinte
 && fc-cache -fv
 
 # install editor library
-RUN npm install --prefix ./static/js ace-builds@1.4.14
+RUN npm install --prefix ./static/js ace-builds@1.6.0
 
 ENTRYPOINT ["python3"]

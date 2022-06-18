@@ -98,7 +98,7 @@ img {
   margin-bottom: 75px;
 }
 
-#content_menu img {
+#content_menu img.node_icon {
   width: 25px;
   margin-right: 10px;
 }
@@ -125,6 +125,7 @@ img {
   #sidenav a {font-size: 18px;}
 }
 
+/* tooltip to display the provider name */
 .tooltip
 {
   position: relative;
@@ -188,4 +189,43 @@ img {
 {
   border-top-color: #ccc;
   bottom: -8px;
+}
+
+/* tooltip to display bigger node icon */
+.node {
+  position: relative;
+  display: block;
+  font-weight: bold;
+}
+
+.node .tooltipimg {
+  visibility: hidden;
+  width: 256px;
+  background-color: #fff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px dotted black;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.node:hover .tooltipimg {
+  visibility: visible;
+  opacity: 1;
+}
+
+.node > img {
+  float: left;
+  padding-right: 5px;
+  width: 30px;
+  max-height: 30px;
 }

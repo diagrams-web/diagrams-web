@@ -21,10 +21,12 @@
               {% for one_node in one_provider.nodes %}
                 <h3>{{ one_node.title }}</h3>
                 {% for one_sub_node in one_node.nodes %}
-                  <a href="#" class="import_class" data-path="{{one_node.title}}" data-class="{{ one_sub_node.name }}" data-alias="{{ one_sub_node.alias }}">
-                    <img src="{{one_node.path }}/{{one_sub_node.icon}}" class="node_icon" />{{ one_sub_node.name }} {% if one_sub_node.alias %}({{one_sub_node.alias}}){% endif %}
-                  </a>
-                  <br>
+                  <div class="node">
+                    <a href="#" class="import_class" data-path="{{one_node.title}}" data-class="{{ one_sub_node.name }}" data-alias="{{ one_sub_node.alias }}">
+                      <img src="{{one_node.path }}/{{one_sub_node.icon}}" alt="{{ one_sub_node.name }}" class="node_icon" />{{ one_sub_node.name }} {% if one_sub_node.alias %}({{one_sub_node.alias}}){% endif %}
+                      <span class="tooltipimg"><img src="{{one_node.path }}/{{one_sub_node.icon}}" alt="{{ one_sub_node.name }}" /></span>
+                    </a>
+                  </div>
                 {% endfor %}
               {% endfor %}
             </div>

@@ -57,12 +57,15 @@ jQuery(document).ready(function () {
       $("#content_menu").append(content_provider);
     });
 
-    $(".import_class").click(function(){
-      console.log("data: " + data);
-    });
-
-    $(".node_icon").mouseover(function(){
-      console.log('sadf');
+    $('body').on('click', 'a.import_class', function() {
+      var data = $(this).data();
+      var string_import = "from diagrams." + data.path + " import " + data.class;
+      if (data.alias) {
+        string_import = string_import + " as " + data.alias
+      }
+      var editor_content = string_import + "\n" + editor.getSession().getValue();
+      editor.setValue(editor_content);
+      editor.gotoLine(1, string_import.length, true);
     });
 
     $('.tooltip').mouseover(function(){
