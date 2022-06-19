@@ -3,12 +3,8 @@ FROM alpine:3.15
 RUN apk update && apk add --no-cache \
   gcc libc-dev g++ graphviz python3 py-pip python3-dev ttf-opensans curl fontconfig npm
 
-COPY . /app
+COPY web /app
 WORKDIR /app
-
-# add the script to generate the menu cache
-COPY scripts/startup.sh /tmp
-RUN chmod +x /tmp/startup.sh
 
 RUN pip3 install -r requirements.txt
 
@@ -26,3 +22,4 @@ RUN curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinte
 RUN npm install --prefix ./static/js ace-builds@1.6.0
 
 ENTRYPOINT ["python3"]
+CMD ["app.py"]
