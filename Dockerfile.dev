@@ -5,6 +5,8 @@ RUN apk update && apk add --no-cache \
 
 COPY web /app
 WORKDIR /app
+COPY /scripts/entrypoint.sh /scripts/start.sh /scripts/
+RUN chmod +x /scripts/*.sh
 
 RUN pip3 install -r requirements.txt
 
@@ -21,5 +23,4 @@ RUN curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinte
 # install editor library
 RUN npm install --prefix ./static/js ace-builds@1.6.0
 
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
+ENTRYPOINT ["/scripts/entrypoint.sh"]

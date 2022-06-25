@@ -16,7 +16,7 @@ def builder():
 
     template = 'app.html'
     values = {
-        "providers": helpers.providers(config.RESSOURCE_PATH),
+        "providers": helpers.providers(config.RESOURCE_PATH),
     }
     # get now to append to the image file to force the browser to refresh the file
     # when we edit the code as the file have the same name.
