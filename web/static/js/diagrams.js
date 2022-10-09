@@ -89,37 +89,28 @@ with Diagram("Grouped Workers", show=False, direction="TB"):
                   EC2("worker5")] >> RDS("events")`
 
 var example_2 =`
-  from diagrams import Cluster, Diagram
-from diagrams.gcp.analytics import BigQuery, Dataflow, PubSub
-from diagrams.gcp.compute import AppEngine, Functions
-from diagrams.gcp.database import BigTable
-from diagrams.gcp.iot import IotCore
-from diagrams.gcp.storage import GCS
+from diagrams import Cluster, Diagram
+from diagrams.aws.compute import ECS
+from diagrams.aws.database import RDS, Aurora
+from diagrams.aws.network import Route53, VPC
 
-with Diagram("Message Collecting", show=False):
-    pubsub = PubSub("pubsub")
+with Diagram("Simple Web Service with DB Cluster", show=False, filename="mysql"):
+    dns = Route53("dns")
+    web = ECS("service")
 
-    with Cluster("Source of Data"):
-        [IotCore("core1"),
-         IotCore("core2"),
-         IotCore("core3")] >> pubsub
+    with VPC('VPC'):
+        # using cluster with an icon
+        with Cluster("DB ClusterA", icon=ECS):
+            db_master1 = RDS("main")
+            db_master1 - [RDS("replica1"), RDS("replica2")]
+        # using the node
+        with Aurora("DB ClusterB") as db2:
+            db_master2 = RDS("main")
+            db_master2 - [RDS("replica1"), RDS("replica2")]
 
-    with Cluster("Targets"):
-        with Cluster("Data Flow"):
-            flow = Dataflow("data flow")
-
-        with Cluster("Data Lake"):
-            flow >> [BigQuery("bq"),
-                     GCS("storage")]
-
-        with Cluster("Event Driven"):
-            with Cluster("Processing"):
-                flow >> AppEngine("engine") >> BigTable("bigtable")
-
-            with Cluster("Serverless"):
-                flow >> Functions("func") >> AppEngine("appengine")
-
-    pubsub >> flow`
+        dns >> web >> db_master1
+        # link to/from cluster
+        dns >> web >> db2`
 
 var example_3 =`
   from diagrams import Cluster, Diagram
