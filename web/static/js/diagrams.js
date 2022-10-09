@@ -131,7 +131,7 @@ with Diagram("Simple Web Service with DB Cluster", show=False, filename="mysql")
         dns >> web >> db2`
 
 var example_3 =`
-  from diagrams import Cluster, Diagram
+from diagrams import Cluster, Diagram, Edge, Node
 from diagrams.onprem.analytics import Spark
 from diagrams.onprem.compute import Server
 from diagrams.onprem.database import PostgreSQL
@@ -141,29 +141,31 @@ from diagrams.onprem.monitoring import Grafana, Prometheus
 from diagrams.onprem.network import Nginx
 from diagrams.onprem.queue import Kafka
 
-with Diagram("Advanced Web Service with On-Premise", show=False):
+with Diagram("Advanced Web Service with On-Premise Less edges", show=False):
     ingress = Nginx("ingress")
 
-    metrics = Prometheus("metric")
-    metrics << Grafana("monitoring")
-
     with Cluster("Service Cluster"):
-        grpcsvc = [
-            Server("grpc1"),
-            Server("grpc2"),
-            Server("grpc3")]
+            serv1 = Server("grpc1")
+            serv2 = Server("grpc2")
+            serv3 = Server("grpc3")
 
-    with Cluster("Sessions HA"):
-        primary = Redis("session")
-        primary - Redis("replica") << metrics
-        grpcsvc >> primary
+    with Cluster(""):
+        blankHA = Node("", shape="plaintext", width="0", height="0")
+        
+        metrics = Prometheus("metric")
+        metrics << Grafana("monitoring")
+        
+        aggregator = Fluentd("logging")
+        blankHA >> aggregator >> Kafka("stream") >> Spark("analytics")
+        
+        with Cluster("Database HA", icon=PostgreSQL):
+            master = PostgreSQL("users")
+            master - PostgreSQL("replica") << metrics
+            blankHA >> master
+        
+        with Cluster("Sessions HA", icon=Redis):
+            master = Redis("session")
+            master - Redis("replica") << metrics
+            blankHA >> master
 
-    with Cluster("Database HA"):
-        primary = PostgreSQL("users")
-        primary - PostgreSQL("replica") << metrics
-        grpcsvc >> primary
-
-    aggregator = Fluentd("logging")
-    aggregator >> Kafka("stream") >> Spark("analytics")
-
-    ingress >> grpcsvc >> aggregator`
+    ingress >> serv2 >> blankHA`
