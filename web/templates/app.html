@@ -16,20 +16,8 @@
     <div id="sidenav">
       <ul id="provider_list">
         {% for one_provider in providers %}
-          <li><a href="#" data-provider="{{one_provider.name}}" class="one_provider tooltip">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}<span>{{one_provider.name}}</span></a>
-            <div style="display:none;"  class="provider {{one_provider.name}}">
-              {% for one_node in one_provider.nodes %}
-                <h3>{{ one_node.title }}</h3>
-                {% for one_sub_node in one_node.nodes %}
-                  <div class="node">
-                    <a href="#" class="import_class" data-path="{{one_node.title}}" data-class="{{ one_sub_node.name }}" data-alias="{{ one_sub_node.alias }}">
-                      <img src="{{one_node.path }}/{{one_sub_node.icon}}" alt="{{ one_sub_node.name }}" class="node_icon" />{{ one_sub_node.name }} {% if one_sub_node.alias %}({{one_sub_node.alias}}){% endif %}
-                      <span class="tooltipimg"><img src="{{one_node.path }}/{{one_sub_node.icon}}" alt="{{ one_sub_node.name }}" /></span>
-                    </a>
-                  </div>
-                {% endfor %}
-              {% endfor %}
-            </div>
+          <li>
+            <a href="#" data-provider="{{one_provider.name}}" class="one_provider tooltip">{% if one_provider.icon %}<img src="{{one_provider.icon}}" alt="{{one_provider.name}}" class="provider_icon">{% else %}{{one_provider.name}}{% endif %}<span>{{one_provider.name}}</span></a>
           </li>
         {% endfor %}
       </ul>

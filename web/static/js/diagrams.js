@@ -50,11 +50,15 @@ jQuery(document).ready(function () {
     });
 
     $(".one_provider").click(function(){
-      var data = $(this).data();
-      var content_provider = $("." + data.provider).clone();
-      content_provider.show()
       $("#content_menu").empty();
-      $("#content_menu").append(content_provider);
+      var data = $(this).data();
+      $.ajax({
+        type : 'GET',
+        url : '/help/' + data.provider
+      })
+      .done(function(result) {
+        $("#content_menu").html(result.content);
+      });
     });
 
     $('body').on('click', 'a.import_class', function() {

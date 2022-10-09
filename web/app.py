@@ -59,5 +59,12 @@ def builder():
     return render_template(template, **values)
 
 
+@app.route('/help/<string:provider>', methods=['GET'])
+def load_provider_help(provider):
+    """"""
+    with open("templates/help/%s.html" % provider, "r") as f:
+        file_content = f.read()
+    return {'content': file_content}
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

@@ -54,9 +54,15 @@ def nodes(provider, resource_path):
 
 def generate_cache_menu():
     """"""
-    with open("cache_menu.json", "w+") as cache_file:
-        file_content = providers(resource_path=config.RESOURCE_PATH, generate=True)
-        cache_file.write(json.dumps(file_content))
+    from flask import Flask, render_template
+
+    provider_content = providers(resource_path=config.RESOURCE_PATH, generate=True)
+    app = Flask(__name__, template_folder= "templates")
+    with app.app_context():
+        for one_provider in provider_content:
+            with open("templates/help/%s.html" % one_provider['name'], "w+") as provider_template:
+                file_content = render_template("help_template.html", one_provider=one_provider)
+                provider_template.write(file_content)
 
 
 if __name__ == "__main__":
