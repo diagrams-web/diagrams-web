@@ -8,22 +8,38 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
-@app.route('/', methods=['POST', 'GET'])
-def builder():
-    """One page app. Display the editor and handle the form post."""
-    import config
+@app.route('/', methods=['GET'])
+def main():
+    """One page app. Display the editor."""
     import helpers
 
     template = 'app.html'
     values = {
-        "providers": helpers.providers(config.RESOURCE_PATH),
+        "providers": helpers.providers(),
     }
-    # get now to append to the image file to force the browser to refresh the file
-    # when we edit the code as the file have the same name.
-    now = datetime.datetime.now()
 
-    diagrams_data = request.form.get('diagrams_data')
+    return render_template(template, **values)
+
+
+@app.route('/help/<string:provider>', methods=['GET'])
+def load_provider_help(provider):
+    """"""
+    with open("templates/help/%s.html" % provider, "r") as f:
+        file_content = f.read()
+    return {'content': file_content}
+
+@app.route('/build', methods=['POST'])
+def build():
+    """Build the diagrams and return the file path to display."""
+    import config
+    values = {}
+
+    diagrams_data = request.form['diagrams_data']
+    print('diagrams_data: ', diagrams_data)
     if diagrams_data:
+        # get now to append to the image file to force the browser to refresh the file
+        # when we edit the code as the file have the same name.
+        now = datetime.datetime.now()
         # dir may not exist
         if not os.path.exists(config.DIAGRAM_PATH):
             os.makedirs(config.DIAGRAM_PATH)
@@ -55,16 +71,9 @@ def builder():
                 "diagrams_data": diagrams_data,
                 "pic_name": '%s?%s' % (pic_name, now),
             })
+    
+    return values
 
-    return render_template(template, **values)
-
-
-@app.route('/help/<string:provider>', methods=['GET'])
-def load_provider_help(provider):
-    """"""
-    with open("templates/help/%s.html" % provider, "r") as f:
-        file_content = f.read()
-    return {'content': file_content}
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

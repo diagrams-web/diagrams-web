@@ -3,32 +3,27 @@ import json
 import os
 
 
-def providers(resource_path, generate=False):
-    """Return the list of providers.
-
-
-    """
-    import json
-
-    if not generate:
-        try:
-            # return from the cache file if exist
-            with open("cache_menu.json", "r") as cache_file:
-                return json.load(cache_file)
-        except IOError:
-            # file don't exist generate the content
-            pass
-
+def providers(with_nodes=False):
+    """Return the list of providers."""
+    all_providers = []
+    
+    resource_path = config.RESOURCE_PATH
     provider_list = os.listdir(resource_path)
     provider_list.sort()
-    # get the icons
     icons = {}
     for one_provider in provider_list:
         provider_path = '%s%s' % (resource_path, one_provider)
+        # get the icons 
         for one_element in os.listdir(provider_path):
             if '.png' in one_element:
                 icons.update({one_provider: '%s/%s' % (provider_path, one_element)})
-    return [{'name': name, 'icon': icons.get(name), 'nodes': nodes(name, resource_path)} for name in provider_list]
+        nodes = []
+        # get the nodes
+        if with_nodes:
+            nodes = nodes(one_provider, resource_path)
+        all_providers.append({'name': one_provider, 'icon': icons.get(one_provider), 'nodes': nodes})
+
+    return all_providers
 
 
 def nodes(provider, resource_path):
@@ -52,11 +47,11 @@ def nodes(provider, resource_path):
     return section
 
 
-def generate_cache_menu():
+def generate_help_template():
     """"""
     from flask import Flask, render_template
 
-    provider_content = providers(resource_path=config.RESOURCE_PATH, generate=True)
+    provider_content = providers(with_nodes=True)
     app = Flask(__name__, template_folder= "templates")
     with app.app_context():
         for one_provider in provider_content:
@@ -67,6 +62,6 @@ def generate_cache_menu():
 
 if __name__ == "__main__":
     """"""
-    print('Generate cache menu.')
-    generate_cache_menu()
-    print('Cache menu generated.')
+    print('Generate help templates.')
+    generate_help_template()
+    print('Help templates generated.')

@@ -10,29 +10,43 @@ jQuery(document).ready(function () {
     // Load examples data and submit
     $("#btn_1").click(function(){
       editor.setValue(example_1.trim());
-      $("#diagrams_data").val(editor.getSession().getValue());
-      $("#diagrams_form").submit();
+      build_diagrams();
     });
     $("#btn_2").click(function(){
       var text = example_2.trim()
       editor.setValue(text);
-      $("#diagrams_data").val(editor.getSession().getValue());
-      $("#diagrams_form").submit();
+      build_diagrams();
     });
     $("#btn_3").click(function(){
       var text = example_3.trim()
       editor.setValue(text);
-      $("#diagrams_data").val(editor.getSession().getValue());
-      $("#diagrams_form").submit();
+      build_diagrams();
     });
     $("#btn_more").click(function(){
       window.open("https://diagrams.mingrammer.com/docs/getting-started/examples", "_blank");
     });
 
     $("#build").click(function(){
-      $("#diagrams_data").val(editor.getSession().getValue());
-      $("#diagrams_form").submit();
+        build_diagrams();
     });
+
+    function build_diagrams(){
+        var diagrams_data = editor.getSession().getValue();
+        $.ajax({
+            data : {'diagrams_data': diagrams_data},
+            type : 'POST',
+            url : '/build'
+        })
+        .done(function(result) {
+            if(result.pic_name){
+              $("#render").html('<img src="static/diagrams/'+result.pic_name+'" alt="'+result.pic_name+'" />');
+              $("#render").removeClass('error');
+            }else if (result.error){
+              $("#render").html('<h4>ERROR</h4><pre><code>'+result.error+'</code></pre>');
+              $("#render").addClass('error');
+            }
+        });
+    };
 
     // help side menu
     $("#open_help").click(function(){

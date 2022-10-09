@@ -34,23 +34,14 @@
         <button class="btn" id="btn_3">Example <i class="round">3</i></button>
         <button class="btn" id="btn_more">More examples</button>
       </div>
-      <form action="" method="POST" id="diagrams_form">
-        <div id="left">
-            <textarea name="diagrams_data" id="diagrams_data" rows="0">{{diagrams_data}}</textarea>
-            <div id="editor">{{diagrams_data}}</div>
-        </div>
-        <div id="render" class="{% if error %}error{% endif %}">
-          {% if error %}
-            <h4>ERROR</h4>
-            <pre><code>{{error}}</code></pre>
-          {% elif pic_name %}
-            <img src="static/diagrams/{{pic_name}}" alt="{{pic_name}}">
-          {% endif %}
-        </div>
-        <div id="action">
-          <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
-        </div>
-      </form>
+      <div id="left">
+          <div id="editor">{{diagrams_data}}</div>
+      </div>
+      <div id="render">
+      </div>
+      <div id="action">
+        <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
+      </div>
     </div>
   </body>
   <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
