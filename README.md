@@ -1,9 +1,10 @@
 # diagrams-web
-Still work in progress to edit and generate [diagrams](https://github.com/mingrammer/diagrams) with your browser.
+Still work in progress to edit and generate [diagrams](https://github.com/mingrammer/diagrams) with your browser (it work on my computer).
 
-Contributions are welcome!
+Contributions are more than welcome!
+You can install and test that it run on your computer, open issues, complain about bugs, ask for features, discuss about ideas, push PR, star the project, join the project etc...
 
-This project is built on Python (Flask app).
+This project is built with Python (Flask app).
 
 No more active project:
 - Node.js version (Polka and Sapper with Typescript), check it out: [microdiagram](https://github.com/renyuanz/microdiagram)
@@ -12,22 +13,31 @@ No more active project:
 
 ### from source:
 
-from source root, run `docker-compose up --build`
+from source root, run `docker compose up --build`
+or if you can run make command on your system `make build`
 
 Wait to have something like this:
 ```shell
-web_1  |  * Serving Flask app "app" (lazy loading)
-web_1  |  * Environment: production
-web_1  |    WARNING: This is a development server. Do not use it in a production deployment.
-web_1  |    Use a production WSGI server instead.
-web_1  |  * Debug mode: on
-web_1  |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-web_1  |  * Restarting with stat
-web_1  |  * Debugger is active!
-web_1  |  * Debugger PIN: 830-873-016
+⠿ Container diagrams-web  Created                                                                                                                                                                     0.0s
+Attaching to diagrams-web
+diagrams-web  | Generate help templates.
+diagrams-web  | Help templates generated.
+diagrams-web  |  * Serving Flask app 'app' (lazy loading)
+diagrams-web  |  * Environment: production
+diagrams-web  |    WARNING: This is a development server. Do not use it in a production deployment.
+diagrams-web  |    Use a production WSGI server instead.
+diagrams-web  |  * Debug mode: on
+diagrams-web  | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+diagrams-web  |  * Running on all addresses (0.0.0.0)
+diagrams-web  |  * Running on http://127.0.0.1:5000
+diagrams-web  |  * Running on http://172.18.0.2:5000
+diagrams-web  | Press CTRL+C to quit
+diagrams-web  |  * Restarting with stat
+diagrams-web  |  * Debugger is active!
+diagrams-web  |  * Debugger PIN: 480-705-269
 ```
 
-then open your browser http://0.0.0.0:5000/
+then open your browser to this address http://172.18.0.2:5000 or http://127.0.0.1:5000
 
 and start coding! (i.e updating the code of diagrams-web)
 
@@ -36,10 +46,10 @@ and start coding! (i.e updating the code of diagrams-web)
 
 Here is only if you want to use the interface.
 
-Get the latest image from dockerhub
+Get the image from dockerhub
 
 ```shell
-docker pull banana123/diagrams-web:latest
+docker pull banana123/diagrams-web:beta.1
 ```
 
 Use any familiar tool to run the container OR
@@ -64,4 +74,4 @@ If you need to access inside the container to check what is inside
 docker exec -it diagrams-web ash
 ```
 
-![Screenshot](web/static/new_design.png)
+![Screenshot](web/static/with_side_menu.png)
