@@ -17,11 +17,11 @@ def providers(with_nodes=False):
         for one_element in os.listdir(provider_path):
             if '.png' in one_element:
                 icons.update({one_provider: '%s/%s' % (provider_path, one_element)})
-        nodes = []
+        nodes_list = []
         # get the nodes
         if with_nodes:
-            nodes = nodes(one_provider, resource_path)
-        all_providers.append({'name': one_provider, 'icon': icons.get(one_provider), 'nodes': nodes})
+            nodes_list = nodes(one_provider, resource_path)
+        all_providers.append({'name': one_provider, 'icon': icons.get(one_provider), 'nodes': nodes_list})
 
     return all_providers
 
@@ -52,10 +52,10 @@ def generate_help_template():
     from flask import Flask, render_template
 
     provider_content = providers(with_nodes=True)
-    app = Flask(__name__, template_folder= "templates")
+    app = Flask(__name__, template_folder=config.TEMPLATE_PATH)
     with app.app_context():
         for one_provider in provider_content:
-            with open("templates/help/%s.html" % one_provider['name'], "w+") as provider_template:
+            with open("%shelp/%s.html" % (config.TEMPLATE_PATH, one_provider['name']), "w+") as provider_template:
                 file_content = render_template("help_template.html", one_provider=one_provider)
                 provider_template.write(file_content)
 
