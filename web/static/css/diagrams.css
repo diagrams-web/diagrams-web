@@ -5,7 +5,7 @@ img {
 .icon {
     width: 100px;
 }
-#menu-bar {
+#menu_bar {
     width: 100%;
     margin-left: 10px;
     margin-top: 10px;
@@ -13,8 +13,13 @@ img {
 }
 #render {
     float: right;
-    min-height: 700px;
+    max-height: 700px;
     width: 50%;
+    overflow: scroll;
+}
+#render img {
+    max-height: 100%;
+    max-width: 100%;
 }
 #left {
     float: left;
@@ -50,4 +55,182 @@ img {
   background-color: #60193c;
   border-radius: 50%;
   display: inline-block;
+}
+.error {
+  font-weight: bold;
+}
+
+/* Side navigation menu for help */
+#sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #FFFFFF;
+  overflow-x: scroll;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+#sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  color: #60193c;
+}
+#sidenav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  /* Below sets up your display method: flex-start|flex-end|space-between|space-around */
+  justify-content: space-around;
+  /* Below removes bullets and cleans white-space */
+  list-style: none;
+  padding: 0;
+  /* Bonus: forces no word-wrap */
+  white-space: nowrap;
+}
+
+#sidenav .provider_icon {
+  width: 25px;
+}
+
+#sidenav .provider {
+  margin-bottom: 75px;
+}
+
+#content_menu img.node_icon {
+  width: 25px;
+  margin-right: 10px;
+}
+
+#content_menu h3 {
+  padding-left: 25px;
+}
+
+#content_menu a {
+  padding-left: 52px;
+}
+
+#close_help {
+  display: hidden;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 20px;
+}
+
+@media screen and (max-height: 450px) {
+  #sidenav {padding-top: 15px;}
+  #sidenav a {font-size: 18px;}
+}
+
+/* tooltip to display the provider name */
+.tooltip
+{
+  position: relative;
+  cursor: help;
+  display: inline-block;
+  text-decoration: none;
+  color: #222;
+  outline: none;
+}
+
+.tooltip span
+{
+  visibility: hidden;
+  position: absolute;
+  bottom: 30px;
+  text-align: center;
+  color: #FFF;
+  font-weight: bold;
+  left: 50%;
+  z-index: 999;
+  width: 100px;
+  margin-left: -63px;
+  padding: 10px;
+  border: 2px solid #60193C;
+  opacity: .9;
+  background-color: #E587B5;
+  background-image: -webkit-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: -moz-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: -ms-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: -o-linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  background-image: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;
+  text-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+
+.tooltip:hover span
+{
+  visibility: visible;
+}
+
+.tooltip span:before,
+.tooltip span:after
+{
+  content: "";
+  position: absolute;
+  z-index: 1000;
+  bottom: -7px;
+  left: 50%;
+  margin-left: -8px;
+  border-top: 8px solid #60193C;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 0;
+}
+
+.tooltip span:before
+{
+  border-top-color: #ccc;
+  bottom: -8px;
+}
+
+/* tooltip to display bigger node icon */
+.node {
+  position: relative;
+  display: block;
+  font-weight: bold;
+}
+
+.node .tooltipimg {
+  visibility: hidden;
+  width: 256px;
+  background-color: #fff;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px dotted black;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip - takes 1 second to go from 0% to 100% opac: */
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.node:hover .tooltipimg {
+  visibility: visible;
+  opacity: 1;
+}
+
+.node > img {
+  float: left;
+  padding-right: 5px;
+  width: 30px;
+  max-height: 30px;
 }

@@ -1,9 +1,13 @@
 version: "3"
 services:
   web:
-    build: ./web
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports: ["5000:5000"]
     volumes: ['./web:/app']
+    command: ["/scripts/start.sh"]
+    container_name: diagrams-web
     healthcheck:
       test: curl --fail -s http://localhost:5000/ || exit 1
       interval: 1m30s

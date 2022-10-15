@@ -1,3 +1,5 @@
 # generated diagrams
 web/static/diagrams/*
 web/static/js/node_modules/*
+*.vscode
+web/templates/help/*
