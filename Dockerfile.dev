@@ -20,7 +20,4 @@ RUN curl -O https://noto-website.storage.googleapis.com/pkgs/NotoSansCJKjp-hinte
 && rm NotoSansCJKjp-hinted.zip \
 && fc-cache -fv
 
-# install editor library
-RUN npm install --prefix ./static/js ace-builds@1.6.0
-
 ENTRYPOINT ["/scripts/entrypoint.sh"]
