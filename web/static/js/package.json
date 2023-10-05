@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "ace-builds": "^1.11.2"
+    "ace-builds": "^1.25.1"
   }
 }
