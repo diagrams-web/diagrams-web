@@ -27,21 +27,25 @@
 
     <div id="main">
       <div id="menu_bar">
-        <button class="btn" id="open_help">Help</button>
-        <button class="btn" id="close_help">&#8592;</button>
-        <button class="btn" id="btn_1">Example <i class="round">1</i></button>
-        <button class="btn" id="btn_2">Example <i class="round">2</i></button>
-        <button class="btn" id="btn_3">Example <i class="round">3</i></button>
-        <button class="btn" id="btn_more">More examples</button>
+        <div>
+          <button class="btn" id="open_help">Help</button>
+          <button class="btn" id="close_help">&#8592;</button>
+          <button class="btn" id="btn_more">Examples</button>
+        </div>
+      <div> 
+        <div id="action">
+          <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
+          <a id='donwload' class="btn">Download</a>
+        </div>    
+      </div>
       </div>
       <div id="left">
           <div id="editor">{{diagrams_data}}</div>
       </div>
       <div id="render">
       </div>
-      <div id="action">
-        <button class="btn" value="Build" id="build">Build <i class="fas fa-angle-double-right"></i></button>
-      </div>
+      <div id="myresult" class="img-zoom-result"></div>
+     
     </div>
   </body>
   <script src="/static/js/node_modules/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>

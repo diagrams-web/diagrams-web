@@ -58,6 +58,7 @@ def build():
             error_msg = result.stderr.decode("utf-8")
             # clean up the error message
             error_msg = error_msg.replace('File "temp_code.py", ', '')
+            print(diagrams_data)
             values.update({
                 "diagrams_data": diagrams_data,
                 "error": error_msg
@@ -67,6 +68,7 @@ def build():
             # FIXME don't work with Custom
             _, _, filenames = next(os.walk(config.DIAGRAM_PATH))
             pic_name = filenames[0]
+ 
             values.update({
                 "diagrams_data": diagrams_data,
                 "pic_name": '%s?%s' % (pic_name, now),

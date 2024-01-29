@@ -6,6 +6,8 @@ img {
     width: 100px;
 }
 #menu_bar {
+  display: flex;
+  justify-content: space-between;
     width: 100%;
     margin-left: 10px;
     margin-top: 10px;
@@ -15,12 +17,30 @@ img {
     float: right;
     max-height: 700px;
     width: 50%;
-    overflow: scroll;
+    position: relative;
 }
 #render img {
-    max-height: 100%;
     max-width: 100%;
+    height: 350px;
 }
+
+.img-zoom-lens {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  /*set the size of the lens:*/
+  width: 40px;
+  height: 40px;
+}
+
+.img-zoom-result {
+  position: relative;
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 47%;
+  height: 300px;
+  float: right;
+}
+
 #left {
     float: left;
     height: 100%;
@@ -45,6 +65,7 @@ img {
   font-weight: bold;
   cursor: pointer;
   margin-right: 15px;
+  text-decoration: none;
 }
 .btn:hover {
   background-color: #60193c;
