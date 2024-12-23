@@ -1,4 +1,4 @@
-FROM alpine:3.19.3
+FROM alpine:3.21.0
 
 RUN apk update && apk add --no-cache \
   gcc libc-dev g++ graphviz python3 py-pip python3-dev ttf-opensans curl fontconfig npm
